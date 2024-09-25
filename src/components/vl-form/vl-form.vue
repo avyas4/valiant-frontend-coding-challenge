@@ -55,7 +55,7 @@ const calculatePMT = () => {
   const loanTermInput = form.loanTerm.value
   const loanAmount = form.loanAmount.value
   if (loanPurpose && requestedRepaymentPeriods && loanTermInput && loanAmount) {
-    // convert negative value to absolute number value and value of a number should be rounded to the nearest integer
+    // convert negative value to absolute number value and rounded integer
     const number = Math.abs(PMT(loanPurpose / requestedRepaymentPeriods, loanTermInput, loanAmount))
     getPMTMonthly.value = Math.round(number)
     getPMTTotal.value = getPMTMonthly.value * loanTermInput
@@ -137,10 +137,10 @@ const hasInputError = (error) => {
             </div>
             <div class="rounded-b border border-t-0 border-green-400 bg-green-100 px-4 py-3 text-green-700">
               <p class="text-sm">
-                {{ lang.vForm.monthlyRepayment }}{{ getPMTMonthly }}
+                {{ lang.vForm.monthlyRepayment + getPMTMonthly }}
               </p>
               <p class="text-sm">
-                {{ lang.vForm.totalRepayment }}{{ getPMTTotal }}
+                {{ lang.vForm.totalRepayment + getPMTTotal }}
               </p>
             </div>
           </div>
