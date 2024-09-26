@@ -27,13 +27,28 @@ const props = defineProps({
     default: 'select',
     Required: true,
   },
+  /**
+   * Validation error message
+   */
+  errorsText: {
+    type: String,
+    default: '',
+    Required: false,
+  },
+  /**
+   * Whether the field value is valid or not
+   */
+  isValid: {
+    type: Boolean,
+    Required: false,
+  },
 })
 
 defineEmits(['change'])
 
 const modelValue = defineModel('modelValue', { type: Number, default: 0 })
 
-/* Start section for Loan Purpose */
+/* Start section */
 const getData = ref(null)
 
 async function fetchData () {
@@ -76,6 +91,14 @@ onMounted(() => {
           {{ item.label }}<option />
         </option>
       </select>
+      <div
+        class="h-6 rounded-lg text-sm text-red-700 dark:text-red-700"
+        role="alert"
+      >
+        <span v-if="errorsText && errorsText !== '' && !isValid">
+          {{ errorsText }}
+        </span>
+      </div>
     </div>
   </div>
 </template>

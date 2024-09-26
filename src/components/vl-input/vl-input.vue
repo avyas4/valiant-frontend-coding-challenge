@@ -34,6 +34,21 @@ const props = defineProps({
     default: 'input',
     Required: true,
   },
+  /**
+   * Validation error message
+   */
+  errorsText: {
+    type: String,
+    default: '',
+    Required: false,
+  },
+  /**
+   * Whether the field value is valid or not
+   */
+  isValid: {
+    type: Boolean,
+    Required: false,
+  },
 })
 
 const emit = defineEmits(['hasError'])
@@ -89,6 +104,9 @@ const validatedInput = () => {
           v-if="isError"
           class="text-sm"
         >{{ `This field must be between ${min} and ${max}` }}</span>
+        <span v-else-if="errorsText && errorsText !== '' && !isValid">
+          {{ errorsText }}
+        </span>
       </div>
     </div>
   </div>

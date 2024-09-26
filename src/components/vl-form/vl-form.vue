@@ -1,7 +1,6 @@
 <script setup>
 import vlInput from '../vl-input/vl-input.vue'
 import vlSelect from '../vl-select/vl-select.vue'
-import vlFormError from './vl-form-error.vue'
 import { ref, computed } from 'vue'
 import PMT from '../../utils/PMT.js'
 import lang from '../lang/v-form.lang.json'
@@ -88,13 +87,6 @@ const hasInputError = (error) => {
               {{ lang.vForm.pageInfo }}
             </p>
           </div>
-          <vl-form-error
-            :errors="objFieldsErrors"
-            :is-loan-amount-valid="isLoanAmountValid"
-            :is-repayment-periods-valid="isRepaymentPeriodsValid"
-            :is-loan-term-valid="isLoanTermValid"
-            :is-loan-purpose-valid="isLoanPurposeValid"
-          />
 
           <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
             <vlInput
@@ -103,12 +95,16 @@ const hasInputError = (error) => {
               name="loan-amount"
               :min="1000"
               :max="20000000"
+              :is-valid="isLoanAmountValid"
+              :errors-text="objFieldsErrors?.isLoanAmountValid"
               @has-error="hasInputError"
             />
 
             <vlSelect
               v-model="form.loanPurpose.value"
               :label="lang.vlLoanPurposeLabel"
+              :is-valid="isLoanPurposeValid"
+              :errors-text="objFieldsErrors?.isLoanPurposeValid"
               url="/loan-purposes"
               name="loan-purposes"
             />
@@ -116,6 +112,8 @@ const hasInputError = (error) => {
             <vlSelect
               v-model="form.repaymentPeriods.value"
               :label="lang.vlRepaymentPeriods"
+              :is-valid="isRepaymentPeriodsValid"
+              :errors-text="objFieldsErrors?.isRepaymentPeriodsValid"
               url="/requested-repayment-periods"
               name="repayment-periods"
             />
@@ -123,6 +121,8 @@ const hasInputError = (error) => {
             <vlSelect
               v-model="form.loanTerm.value"
               :label="lang.vlLoanTermLabel"
+              :is-valid="isLoanTermValid"
+              :errors-text="objFieldsErrors?.isLoanTermValid"
               url="/requested-term-months"
               name="loan-term"
             />
