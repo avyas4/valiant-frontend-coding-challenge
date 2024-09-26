@@ -1,8 +1,6 @@
 <script setup>
-import vlLoanAmount from '../vl-loan-amount/vl-loan-amount.vue'
-import vlLoanPurpose from '../vl-loan-purpose/vl-loan-purpose.vue'
-import vlRepaymentPeriods from '../vl-repayment-periods/vl-repayment-periods.vue'
-import vlLoanTerm from '../vl-loan-term/vl-loan-term.vue'
+import vlInput from '../vl-input/vl-input.vue'
+import vlSelect from '../vl-select/vl-select.vue'
 import vlFormError from './vl-form-error.vue'
 import { ref, computed } from 'vue'
 import PMT from '../../utils/PMT.js'
@@ -99,23 +97,34 @@ const hasInputError = (error) => {
           />
 
           <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-            <vlLoanAmount
+            <vlInput
               v-model="form.loanAmount.value"
+              :label="lang.vlLoanAmountLabel"
+              name="loan-amount"
               :min="1000"
               :max="20000000"
               @has-error="hasInputError"
             />
 
-            <vlLoanPurpose
+            <vlSelect
               v-model="form.loanPurpose.value"
+              :label="lang.vlLoanPurposeLabel"
+              url="/loan-purposes"
+              name="loan-purposes"
             />
 
-            <vlRepaymentPeriods
+            <vlSelect
               v-model="form.repaymentPeriods.value"
+              :label="lang.vlRepaymentPeriods"
+              url="/requested-repayment-periods"
+              name="repayment-periods"
             />
 
-            <vlLoanTerm
+            <vlSelect
               v-model="form.loanTerm.value"
+              :label="lang.vlLoanTermLabel"
+              url="/requested-term-months"
+              name="loan-term"
             />
           </div>
           <div class="mt-6 flex items-center justify-end gap-x-6">

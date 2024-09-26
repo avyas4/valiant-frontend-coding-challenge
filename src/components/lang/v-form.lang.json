@@ -1,7 +1,7 @@
 {
     "vForm":{
        "validationMessage":{
-          "loanAmountValidationMessage":"Loan Amount field is required.",
+          "loanAmountValidationMessage":"Requested Loan Amount field is required.",
           "repaymentPeriodsValidationMessage":"Repayment Periods field is required.",
           "loanTermValidationMessage":"Loan Term input field is required.",
           "loanPurposeValidationMessage":"Loan Purpose field is required."

@@ -1,23 +1,38 @@
 <script setup>
 
 defineProps({
+  /**
+   * Validation object of errors
+   */
   errors: {
     type: Object,
     default: () => {},
     Required: false,
   },
+  /**
+   * Validation flag for requested loan amount
+   */
   isLoanAmountValid: {
     type: Boolean,
     Required: false,
   },
+  /**
+   * Validation flag for repayment period
+   */
   isRepaymentPeriodsValid: {
     type: Boolean,
     Required: false,
   },
+  /**
+   * Validation flag for loan term
+   */
   isLoanTermValid: {
     type: Boolean,
     Required: false,
   },
+  /**
+   * Validation flag for loan purpose
+   */
   isLoanPurposeValid: {
     type: Boolean,
     Required: false,
@@ -35,6 +50,12 @@ defineProps({
       {{ errors.isLoanAmountValid }}
     </li>
     <li
+      v-if="errors?.isLoanPurposeValid && !isLoanPurposeValid"
+      class="text-sm text-red-700"
+    >
+      {{ errors.isLoanPurposeValid }}
+    </li>
+    <li
       v-if="errors?.isRepaymentPeriodsValid && !isRepaymentPeriodsValid"
       class="text-sm text-red-700"
     >
@@ -45,12 +66,6 @@ defineProps({
       class="text-sm text-red-700"
     >
       {{ errors.isLoanTermValid }}
-    </li>
-    <li
-      v-if="errors?.isLoanPurposeValid && !isLoanPurposeValid"
-      class="text-sm text-red-700"
-    >
-      {{ errors.isLoanPurposeValid }}
     </li>
   </ul>
 </template>
